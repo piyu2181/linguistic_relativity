@@ -32,6 +32,8 @@ class ProcessData:
 
 
     def find_matching_files(self):
-
+        '''
+        This function searches for all the filepaths in the provided data path
+        '''
 
 
