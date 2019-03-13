@@ -24,10 +24,14 @@ class ProcessData:
     n_passes = 20
     matching_files = {}
     data_path = './UN/'
+
     
-    def __init__(self, languages, years, min_count = 5, remove_n = 50, n_topics = 10, n_passes = 20):
+    def __init__(self,
+                 languages, years, target_language = "English",
+                 min_count = 5, remove_n = 50, n_topics = 10, n_passes = 20):
 
         self.languages = languages
+        self.target_language = target_language
         self.years = years
         self.min_count = min_count
         self.remove_n = remove_n
@@ -50,15 +54,29 @@ class ProcessData:
                 filepaths[language][year] = [file[file.index('\\')+1:] 
                                             for file in filepaths[language][year]]
         matching_files = {}
+        # Getting the unique set of names for all the files located
         for year in self.years:
-            set1 = set(filepaths["English"][year])
-            set2 = set(filepaths["Arabic"][year])
-            set3 = set(filepaths["Chinese"][year])
-            set4 = set(filepaths["Russian"][year])
-            set5 = set(filepaths["Spanish"][year])
-            set6 = set(filepaths["French"][year])
-            set1.intersection_update(set2, set3, set4, set5, set6)
-            matching_files[year] = list(set1)
+            language_set = {}
+            # Finding the set of unique filenames for each language
+            for language in self.languages:
+                language_set[language] = set(filepaths[language][year])
+
+            # Update the set for the target language to only contain filenames that are present in all languages
+            for language in self.languages:
+                language_set[self.target_language].intersection_update(language_set[self.language])
+
+            # Putting the found filenames into matching_files
+            matching_files[year] = list(language_set[self.target_language])
+
+            # This part needs to be deleted, if the above code works fine
+            # set1 = set(filepaths["English"][year])
+            # set2 = set(filepaths["Arabic"][year])
+            # set3 = set(filepaths["Chinese"][year])
+            # set4 = set(filepaths["Russian"][year])
+            # set5 = set(filepaths["Spanish"][year])
+            # set6 = set(filepaths["French"][year])
+            # set1.intersection_update(set2, set3, set4, set5, set6)
+            # matching_files[year] = list(set1)
         return matching_files
 
 
