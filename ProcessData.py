@@ -4,7 +4,7 @@ performing linguistic relativity
 Author: Debjani Bhowmick, Tilburg University
 Year: 2019
 """
-
+import os
 
 class ProcessData:
 
@@ -39,10 +39,11 @@ class ProcessData:
         self.n_passes = n_passes
 
 
-    def find_matching_files(self):
+    def find_matching_files(self, save_flag = False):
         '''
         This function creates a dictionary containing the filepaths for all
         the files in all the desired languages and desired years
+        save_Flag: if True, the matching_files vector is stored in ./temp/matching_files.rxt in human-readable format
         '''
         filepaths = {}
         for language in self.languages:
@@ -77,6 +78,17 @@ class ProcessData:
             # set6 = set(filepaths["French"][year])
             # set1.intersection_update(set2, set3, set4, set5, set6)
             # matching_files[year] = list(set1)
+
+            # Saving the matching_files information
+            if save_flag == True:
+                save_fpath = os.concat(need to create the path here)
+
+                # Writing into the file
+                fid = open(save_fpath, "w+")
+                for i in len(matching_files):
+                    // write all file names for ith year in one line with tab separators
+                    
+                fid.close()
         return matching_files
 
 
