@@ -15,12 +15,15 @@ class ProcessData:
     remove_n:
     n_topics:
     n_passes:
+    matching_files: stores the paths for all the files of desired languages and years
+    data_path: Path for the data; should refer to the path containing folders for languages and years
     '''
     min_count = 5
     remove_n = 50
     n_topics = 10
     n_passes = 20
-    matching_files = []
+    matching_files = {}
+    data_path = './UN/'
     
     def __init__(self, languages, years, min_count = 5, remove_n = 50, n_topics = 10, n_passes = 20):
 
@@ -42,8 +45,8 @@ class ProcessData:
             filepaths[language] = {}
         for language in self.languages:
             for year in self.years:
-                filepaths[language][year] = get_filepaths(
-                                            "UN/{}/{}".format(language, year))
+                full_path = self.data_path + "{}/{}".format(language, year)
+                filepaths[language][year] = get_filepaths(full_path)
                 filepaths[language][year] = [file[file.index('\\')+1:] 
                                             for file in filepaths[language][year]]
         matching_files = {}
