@@ -17,6 +17,9 @@ data_path = "/Users/dgupta/Desktop/UN/"
 
 # Create object for ProcessData class
 obj_process = prd.ProcessData(data_path, languages, years, process_sign="T001")
-
 # Finding all the matching files
 obj_process.find_matching_files(save_flag=True, save_fname="temp.txt")
+# Preparing the corpus data
+obj_process.prepare_corpus()
+
+# Perform anaysis
