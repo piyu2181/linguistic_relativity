@@ -20,15 +20,11 @@ class ProcessData:
     min_count: Defines the min. number of documents that contain a certain word; a count below this number would
     ignore the word from the study
     remove_n:
-    n_topics:
-    n_passes:
     matching_files: stores the paths for all the files of desired languages and years
     data_path: Path for the data; should refer to the path containing folders for languages and years
     '''
     min_count = 5
     remove_n = 50
-    n_topics = 10
-    n_passes = 20
     matching_files = {}
     data_path = './UN/'
     matching_files = {}
@@ -36,15 +32,13 @@ class ProcessData:
     
     def __init__(self,
                  data_path, languages, years, target_language = "English", process_sign = "temp",
-                 min_count = 5, remove_n = 50, n_topics = 10, n_passes = 20):
+                 min_count = 5, remove_n = 50):
 
         self.languages = languages
         self.target_language = target_language
         self.years = years
         self.min_count = min_count
         self.remove_n = remove_n
-        self.n_topics = n_topics
-        self.n_passes = n_passes
         self.data_path = data_path
         self.process_sign = process_sign
 

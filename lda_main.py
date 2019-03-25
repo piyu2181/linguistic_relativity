@@ -198,6 +198,7 @@ def lda(languages, years, num_topics, passes):
                     model.update(corpus)
                     print("Pass {} completed for {}, {}, {} topics".format(i, language, year, n))
             model.save("temp/models/{}_{}".format(language, n))
+
             write_output("output/{}_topics/{}.txt".format(n, language), model, language) 
             
             
